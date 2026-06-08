@@ -1,15 +1,5 @@
 accounts = {}
 
-def get_input(message):
-    value = input(message)
-
-    if value.lower() == "exit":
-        print("Thank You!")
-        exit()
-
-    return value
-
-
 while True:
 
     print("\n===== BANK MANAGEMENT SYSTEM =====")
@@ -20,93 +10,85 @@ while True:
     print("5. Account Details")
     print("6. Exit")
 
-    choice = get_input("Enter Choice: ")
+    choice = input("Enter Choice: ")
 
     if choice == "1":
 
-        acc_no = get_input("Enter Account Number: ")
+        acc_no = input("Enter Account Number: ")
+        name = input("Enter Name: ")
 
-        if acc_no in accounts:
-            print("Account Already Exists!")
+        accounts[acc_no] = {
+            "name": name,
+            "balance": 0
+        }
 
-        else:
-            name = get_input("Enter Name: ")
-            pin = get_input("Create 4-Digit PIN: ")
-
-            accounts[acc_no] = {
-                "name": name,
-                "pin": pin,
-                "balance": 0
-            }
-
-            print("Account Created Successfully!")
+        print("Account Created Successfully!")
 
     elif choice == "2":
 
-        acc_no = get_input("Enter Account Number: ")
-        pin = get_input("Enter PIN: ")
+        acc_no = input("Enter Account Number: ")
 
-        if acc_no in accounts and accounts[acc_no]["pin"] == pin:
+        if acc_no in accounts:
 
-            amount = float(get_input("Enter Deposit Amount: "))
+            amount = float(input("Enter Deposit Amount: "))
 
             accounts[acc_no]["balance"] += amount
 
             print("Deposit Successful!")
-            print("Current Balance:", accounts[acc_no]["balance"])
+            print("Balance:", accounts[acc_no]["balance"])
 
         else:
-            print("Invalid Account Number or PIN!")
+
+            print("Account Not Found!")
 
     elif choice == "3":
 
-        acc_no = get_input("Enter Account Number: ")
-        pin = get_input("Enter PIN: ")
+        acc_no = input("Enter Account Number: ")
 
-        if acc_no in accounts and accounts[acc_no]["pin"] == pin:
+        if acc_no in accounts:
 
-            amount = float(get_input("Enter Withdrawal Amount: "))
+            amount = float(input("Enter Withdraw Amount: "))
 
             if amount <= accounts[acc_no]["balance"]:
 
                 accounts[acc_no]["balance"] -= amount
 
                 print("Withdrawal Successful!")
-                print("Remaining Balance:", accounts[acc_no]["balance"])
+                print("Balance:", accounts[acc_no]["balance"])
 
             else:
+
                 print("Insufficient Balance!")
 
         else:
-            print("Invalid Account Number or PIN!")
+
+            print("Account Not Found!")
 
     elif choice == "4":
 
-        acc_no = get_input("Enter Account Number: ")
-        pin = get_input("Enter PIN: ")
+        acc_no = input("Enter Account Number: ")
 
-        if acc_no in accounts and accounts[acc_no]["pin"] == pin:
+        if acc_no in accounts:
 
-            print("Current Balance:",
-                  accounts[acc_no]["balance"])
+            print("Balance:", accounts[acc_no]["balance"])
 
         else:
-            print("Invalid Account Number or PIN!")
+
+            print("Account Not Found!")
 
     elif choice == "5":
 
-        acc_no = get_input("Enter Account Number: ")
-        pin = get_input("Enter PIN: ")
+        acc_no = input("Enter Account Number: ")
 
-        if acc_no in accounts and accounts[acc_no]["pin"] == pin:
+        if acc_no in accounts:
 
-            print("\n===== ACCOUNT DETAILS =====")
-            print("Account Number :", acc_no)
-            print("Name           :", accounts[acc_no]["name"])
-            print("Balance        :", accounts[acc_no]["balance"])
+            print("\nAccount Number:", acc_no)
+            print("Name:", accounts[acc_no]["name"])
+            print("Balance:", accounts[acc_no]["balance"])
 
         else:
-            print("Invalid Account Number or PIN!")
+
+            print("Account Not Found!")
 
     elif choice == "6":
 
